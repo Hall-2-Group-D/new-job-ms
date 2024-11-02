@@ -63,6 +63,24 @@
                         <div>Registration</div>
                     </a>
                 </li>
+<<<<<<< HEAD
+                <li class='menu-item@(currentPage == "/Home/Recruiter/Index" ? " active open"  : "")'>
+                    <a asp-controller="Jobpost" asp-action="Index" class="menu-link">
+                            <div>Active Jobs</div>
+                        </a>
+                    </li>
+                    <li class='menu-item@(currentPage == "/JobListings/ArchivedJobs" ? " active" : "")'>
+                        <a href="javascript:void(0);" class="menu-link">
+                            <div>Archived Jobs</div>
+                        </a>
+                    </li>
+=======
+                <li class='menu-item@(currentPage == "/LayoutExamples/Blank" ? " active" : "")'>
+                    <a asp-controller="LayoutExamples" asp-action="Blank" class="menu-link">
+                        <div>jop request</div>
+                    </a>
+                </li>
+>>>>>>> 83dcda94eafeee37564c66374c99f79d13583752
             </ul>
         </li>
         <li class='menu-item@(currentPage.StartsWith("/FormLayouts") ? " active open" : "")'>

@@ -63,6 +63,11 @@
                         <div>Registration</div>
                     </a>
                 </li>
+                <li class='menu-item@(currentPage == "/LayoutExamples/Blank" ? " active" : "")'>
+                    <a asp-controller="LayoutExamples" asp-action="Blank" class="menu-link">
+                        <div>jop request</div>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class='menu-item@(currentPage.StartsWith("/FormLayouts") ? " active open" : "")'>

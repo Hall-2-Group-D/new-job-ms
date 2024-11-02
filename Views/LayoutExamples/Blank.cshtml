@@ -1,7 +1,180 @@
-﻿@{
+@{
   ViewData["Title"] = "Blank layout - Layouts";
   Layout = "_BlankLayout";
 }
 @* ************** Content ************** *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | Your Organization</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base and Reset Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #f0f0f0;
+            color: #333;
+            line-height: 1.6;
+        }
 
-<h4 class="p-6">Blank Page</h4>
+        /* Typography */
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+        }
+
+        /* Header Styles */
+        .header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+        .navbar a {
+            color: #2c3e50;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .navbar a:hover {
+            color: #3498db;
+        }
+
+        /* Banner */
+        .banner {
+            background-image: url('https://source.unsplash.com/1600x900/?nature,water');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            text-align: center;
+        }
+        .banner h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+        .banner p {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        /* Sections */
+        .section {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: -50px; /* Overlap section on banner */
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+        }
+        .section.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Jobs Cards */
+        .job-card {
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .job-card:hover {
+            border-left: 5px solid #2c3e50;
+            background: #ecf0f1;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* Responsive Design */
+     
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#jobs">Jobs</a>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <div>
+            <h1>Welcome to Our Organization</h1>
+            <p>Innovating for a Better Tomorrow</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="about" class="section active">
+            <h2>About Us</h2>
+            <p>We are committed to delivering excellence and innovation across all our ventures. Our team's dedication and our state-of-the-art technology drive our mission to push boundaries and set new standards in the industry.</p>
+        </div>
+
+        <div id="jobs" class="section active">
+            <h2>Join Our Team</h2>
+            <div class="job-card">
+                <h3>Software Engineer</h3>
+                <p>Contribute to leading-edge technology projects and collaborate with a team of thinkers and innovators. Location: Silicon Valley.</p>
+            </div>
+            <div class="job-card">
+                <h3>Marketing Specialist</h3>
+                <p>Help shape our brand's future with your expertise in digital marketing and analytics. Location: Remote / New York City.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Your Organization. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script to add 'active' class to sections when scrolled into view
+        document.addEventListener('DOMContentLoaded', function () {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

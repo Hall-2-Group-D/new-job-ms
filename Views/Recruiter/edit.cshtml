@@ -1,0 +1,75 @@
+@model AspnetCoreMvcFull.Models.Recruiterviewmodel
+@{
+    ViewData["Title"] = "Edit Recruiter";
+}
+
+<!-- Form Start-->
+<form action="edit" method="post">
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header">Edit Form</h5>
+            <div class="card-body">
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Id</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" readonly placeholder="Enter Company Name" asp-for="id" />
+                    <span asp-validation-for="id" class="text-danger"> </span>
+                </div>
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Company Name</label>
+                    <input type="text"  class="form-control" id="exampleFormControlInput1" placeholder="Enter Company Name" asp-for="company_name" />
+                    <span asp-validation-for="company_name" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Company Website</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Company Website" asp-for="company_website" />
+                    <span asp-validation-for="company_website" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Contact Number</label>
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Enter Contact Number" asp-for="contact_number" />
+                    <span asp-validation-for="contact_number" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Location</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Location" asp-for="location" />
+                    <span asp-validation-for="location" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Reg Date</label>
+                    <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Enter" asp-for="reg_date" />
+                    <span asp-validation-for="reg_date" class="text-danger"> </span>
+                </div>
+
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">User Id</label>
+                    <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="Enter User " asp-for="user_id" />
+                    <span asp-validation-for="user_id" class="text-danger"> </span>
+                </div>
+
+
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-outline-primary" ]
+                type="submit">Edit</button>
+            </div>
+
+
+
+        </div>
+    </div>
+</form>
+<!--Form End-->
+
+
+<style>
+    form{
+      margin-left:20%;
+    }
+</style>
+

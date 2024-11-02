@@ -1,0 +1,244 @@
+@model List<AspnetCoreMvcFull.Models.jobpostModel>
+
+<div class="container-xl mt-5">
+    <div class="text-end mb-4 d-md-flex justify-content-between align-items-center">
+        <h1>Data View Table</h1>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+            Add Job
+        </button>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Job Posted</h5>
+        <div class="table-responsive text-nowrap">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Job ID</th>
+                    <th>Job Title</th>
+                    <th>Job Description</th>
+                    <th>Requirements</th>
+                    <th>Shift</th>
+                    <th>Location</th>
+                    <th>Salary</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                    @foreach (var jms in Model)
+                    {
+                        <tr>
+                            <td>@jms.Id</td>
+                            <td>@jms.JobTitle</td>
+                            <td>@jms.JobDescription</td>
+                            <td>@jms.Requirements</td>
+                            <td>@jms.Category</td> <!-- Updated to display 'Shift' as per modal field -->
+                            <td>@jms.Location</td>
+                            <td>@jms.SalaryRange</td>
+                            <td>@jms.Deadline.ToString("yyyy-MM-dd")</td>
+                            <td>@jms.Status</td>
+                            <td>@jms.CreatedAt.ToString("yyyy-MM-dd")</td>
+                            <td>@jms.UpdatedAt.ToString("yyyy-MM-dd")</td>
+                            <td>
+                                <!-- Edit Button -->
+                                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#editModal" onclick="loadJobPostData('@jms.Id')">Edit</button>
+
+                                <!-- Delete Button -->
+                                <form asp-action="Delete" asp-controller="Jobpost" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@jms.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    <!-- Add Job Modal -->
+<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="Add" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Add Job Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Job Title -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="jobTitle" class="form-label">Job Title</label>
+                            <input type="text" id="jobTitle" name="JobTitle" class="form-control" placeholder="Enter Job Title">
+                        </div>
+                    </div>
+
+                    <!-- Job Description and Requirements -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="jobDescription" class="form-label">Job Description</label>
+                            <textarea id="jobDescription" name="JobDescription" class="form-control" rows="4" placeholder="Enter job description here"></textarea>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="requirements" class="form-label">Requirements</label>
+                            <textarea id="requirements" name="Requirements" class="form-control" rows="4" placeholder="Enter job requirements"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Category (Shift) and Location -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="category" class="form-label">Shift</label>
+                            <select id="category" name="Category" class="form-select">
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" id="location" name="Location" class="form-control" placeholder="Enter job location">
+                        </div>
+                    </div>
+
+                    <!-- Salary Range and Deadline -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="salaryRange" class="form-label">Salary Range</label>
+                            <input type="text" id="salaryRange" name="SalaryRange" class="form-control" placeholder="Enter salary range">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="deadline" class="form-label">Application Deadline</label>
+                            <input type="date" id="deadline" name="Deadline" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="status" class="form-label">Status</label>
+                            <select id="status" name="Status" class="form-select">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Edit Job Modal -->
+<!-- Edit Job Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="EditJobpost" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Job Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Hidden field for Job ID -->
+                    <input type="hidden" id="editId" name="Id">
+
+                    <!-- Job Title -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="editJobTitle" class="form-label">Job Title</label>
+                            <input type="text" id="editJobTitle" name="JobTitle" class="form-control" placeholder="Enter Job Title">
+                        </div>
+                    </div>
+
+                    <!-- Job Description and Requirements -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="editJobDescription" class="form-label">Job Description</label>
+                            <textarea id="editJobDescription" name="JobDescription" class="form-control" rows="4" placeholder="Enter job description here"></textarea>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="editRequirements" class="form-label">Requirements</label>
+                            <textarea id="editRequirements" name="Requirements" class="form-control" rows="4" placeholder="Enter job requirements"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Shift (Category) and Location -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="editCategory" class="form-label">Shift</label>
+                            <select id="editCategory" name="Category" class="form-select">
+                                <option value="Full-time">Full-time</option>
+                                <option value="Part-time">Part-time</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="editLocation" class="form-label">Location</label>
+                            <input type="text" id="editLocation" name="Location" class="form-control" placeholder="Enter job location">
+                        </div>
+                    </div>
+
+                    <!-- Salary Range and Deadline -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="editSalaryRange" class="form-label">Salary Range</label>
+                            <input type="text" id="editSalaryRange" name="SalaryRange" class="form-control" placeholder="Enter salary range">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="editDeadline" class="form-label">Application Deadline</label>
+                            <input type="date" id="editDeadline" name="Deadline" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="editStatus" class="form-label">Status</label>
+                            <select id="editStatus" name="Status" class="form-select">
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<script>
+    function loadJobPostData(id) {
+        fetch(`/Jobpost/GetJobById?id=${id}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('editId').value = data.id;
+                document.getElementById('editJobTitle').value = data.jobTitle;
+                document.getElementById('editJobDescription').value = data.jobDescription;
+                document.getElementById('editRequirements').value = data.requirements;
+                document.getElementById('editCategory').value = data.category;
+                document.getElementById('editLocation').value = data.location;
+                document.getElementById('editSalaryRange').value = data.salaryRange;
+                document.getElementById('editDeadline').value = data.deadline;
+                document.getElementById('editStatus').value = data.status;
+            })
+            .catch(error => console.error('Error fetching job data:', error));
+    }
+</script>

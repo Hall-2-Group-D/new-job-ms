@@ -5,6 +5,10 @@ namespace AspnetCoreMvcFull.Data
 {
   public class RecruiterDbcontext : DbContext
   {
+    public RecruiterDbcontext()
+    {
+    }
+
     public RecruiterDbcontext(DbContextOptions options) : base(options)
     {
     }

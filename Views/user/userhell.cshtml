@@ -1,3 +1,120 @@
-@model AspnetCoreMvcFull.Models.userViewNodel
+@model List<AspnetCoreMvcFull.Models.userViewNodel>
 @{
+    var successMessage = TempData["successMessage"]?.ToString();
+
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
 }
+
+
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/libs/apex-charts/apex-charts.css" />
+}
+@section VendorScripts {
+    <script src="~/vendor/libs/apex-charts/apexcharts.js"></script>
+}
+@section PageScripts {
+    <script src="~/js/dashboards-analytics.js"></script>
+}
+
+@* ************** Content ************** *@
+<div class="row">
+
+    <!-- Total Revenue -->
+    <!-- Form Start-->
+    <form>
+
+        @if (!string.IsNullOrWhiteSpace(@successMessage))
+
+        {
+            <div class="alert alert-success">
+                <strong>Success</strong>@successMessage
+            </div>
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+        }
+
+        else if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>@ErrorMessage
+            </div>
+            <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+        }
+
+        <!-- Basic Bootstrap Table -->
+        <div class="card">
+            <h5 class="card-header">Table Basic</h5>
+            <button asp-action="createUser" asp-controller="user" class="mb-3 ">Create User</button>
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Full Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Reg Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @if (Model != null && Model.Any())
+
+                        {
+                            @foreach (var user in Model)
+
+                            {
+                                <tr>
+                                    <td>@user.id</td>
+                                    <td>@user.fullname</td>
+                                    <td>@user.username</td>
+                                    <td>@user.email</td>
+                                    <td>@user.pass</td>
+                                    <td>@user.reg_date.ToString("dd-MM-yyyy")</td>
+                                    
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-controller="user" asp-action="edituser" asp-route-id="@user.id" class="btn btn-primary ">Edit</a>
+                                            <a asp-controller="user" asp-action="delete" asp-route-id="@user.id" class="btn btn-danger">Delete</a>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                        else
+
+                        {
+                            <tr>
+                                <td colspan="6">
+                                    <div>
+                                        No Recruiter Available At this Moment!
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/ Basic Bootstrap Table -->
+    </form>
+    <!--Form End-->
+    <!--/ Total Revenue -->
+
+</div>
+<div class="row">
+    <!-- Order Statistics -->
+    <!--/ Order Statistics -->
+    <!-- Expense Overview -->
+    <!--/ Expense Overview -->
+    <!-- Transactions -->
+    <!--/ Transactions -->
+</div>

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspnetCoreMvcFull.Migrations
 {
     [DbContext(typeof(RecruiterDbcontext))]
-    [Migration("20241102072340_Initial Migration")]
+    [Migration("20241102095157_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

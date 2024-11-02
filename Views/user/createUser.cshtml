@@ -1,0 +1,81 @@
+@model AspnetCoreMvcFull.Models.userViewNodel
+@{
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+
+
+}
+
+
+
+
+
+<!-- Form Start-->
+<form action="createUser" method="post">
+    @if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+
+    {
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@ErrorMessage
+    </div>
+    <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    }
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header">Recruiter Form</h5>
+            <div class="card-body">
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name" asp-for="fullname" />
+                    <span asp-validation-for="fullname" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">User Name</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter User Name " asp-for="username" />
+                    <span asp-validation-for="username" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter Email" asp-for="email" />
+                    <span asp-validation-for="email" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="Enter Password" asp-for="pass" />
+                    <span asp-validation-for="pass" class="text-danger"> </span>
+                </div>
+
+                <div class="mb-4">
+                    <label for="exampleFormControlInput1" class="form-label">Reg Date</label>
+                    <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Enter" asp-for="reg_date" />
+                    <span asp-validation-for="reg_date" class="text-danger"> </span>
+                </div>
+
+                
+                
+                
+
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-outline-primary" type="submit">Add</button>
+            </div>
+
+            
+
+        </div>
+    </div>
+</form>
+<!--Form End-->
+
+
+<style>
+  form{
+    margin-left:20%;
+  }
+</style>
+
+
+

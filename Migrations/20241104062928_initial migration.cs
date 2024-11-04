@@ -6,15 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspnetCoreMvcFull.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Migrations/20241102110035_init.cs
-    public partial class init : Migration
-========
-    public partial class InitialCreate : Migration
->>>>>>>> 83dcda94eafeee37564c66374c99f79d13583752:Migrations/20241102110305_InitialCreate.cs
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Tbl_JobApplications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ResumePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Education = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AppliedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tbl_JobApplications", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Tbl_jobpostModels",
                 columns: table => new
@@ -75,6 +90,9 @@ namespace AspnetCoreMvcFull.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Tbl_JobApplications");
+
             migrationBuilder.DropTable(
                 name: "Tbl_jobpostModels");
 

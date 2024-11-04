@@ -1,129 +1,44 @@
+@model IEnumerable<AspnetCoreMvcFull.Models.jobpostModel>
+<!-- Ensure this matches your actual model namespace and class -->
+
 @{
     ViewData["Title"] = "Container layout - Layouts";
 }
 
 
-@section VendorStyles {
-    <link rel="stylesheet" href="~/vendor/libs/apex-charts/apex-charts.css" />
-}
-@section VendorScripts {
-    <script src="~/vendor/libs/apex-charts/apexcharts.js"></script>
-}
-@section PageScripts {
-    <script src="~/js/dashboards-analytics.js"></script>
-}
+<!-- Add a link to Bootstrap CSS in your layout or directly here -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<div class="container mt-5">
+    <h1 class="mb-3">Job Listing</h1>
+    <div class="d-flex justify-content-around mb-4">
+        <button class="btn btn-outline-primary">Featured</button>
+        <button class="btn btn-outline-secondary">Full Time</button>
+        <button class="btn btn-outline-secondary">Part Time</button>
+    </div>
 
-<div class="row">
+    <!-- Jobs list -->
+    <div class="row">
+        <!-- Loop through your jobs here, example static content is used -->
+        @for (int i = 0; i < 2; i++)
 
-
-
-
-    <class ="container-xl mt-5">
-        <div class="text-end mb-4 d-md-flex justify-content-between align-items-center">
-            <h1>Latest JOPS</h1>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                Apply
-            </button>
-            </a>
-        </div>
-
-        <div class="col-sm-6 col-lg-3 mb-6">
-            <div class="card card-border-shadow-primary h-100">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="avatar me-4">
-                            <span class="avatar-initial rounded bg-label-primary">
-                                <i class="bx bx-briefcase bx-lg"></i>
-                            </span>
-                        </div>
-                        <h4 class="mb-0">Job Title</h4>
-                    </div>
-                    <p class="mb-2"><strong>Job Description:</strong> Brief description of the job role and responsibilities.</p>
-                    <p class="mb-2"><strong>Requirements:</strong> List of job requirements and qualifications.</p>
-                    <p class="mb-2"><strong>Location:</strong> City or location of the job.</p>
-                    <p class="mb-2"><strong>Salary Range:</strong> Expected salary range for the position.</p>
-                    <p class="mb-2"><strong>Deadline:</strong> Application deadline date.</p>
-                    <p class="mb-2"><strong>Status:</strong> Current status of the job (e.g., Open, Closed).</p>
-                    <div class="d-grid mt-3">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-                            Apply
-                        </button>
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Software Engineer</h5>
+                        <h6 class="text-muted">TechCom</h6>
+                        <p class="small text-muted mb-2">New York, USA | Full Time</p>
+                        <p class="mb-2"><strong>Salary:</strong> $123 - $456</p>
+                        <p class="mb-3"><strong>Date Line:</strong> 01 Jan, 2045</p>
+                        <a href="#" class="btn btn-success">Apply Now</a>
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-    </class>
-
-    <!-- Modal -->
-
-    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalCenterTitle">Job Post</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" id="firstName" class="form-control" placeholder="Enter First Name">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" id="lastName" class="form-control" placeholder="Enter Last Name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="contactNumber" class="form-label">Contact Number</label>
-                            <input type="tel" id="contactNumber" class="form-control" placeholder="Enter Contact Number">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="emailWithTitle" class="form-label">Email</label>
-                            <input type="email" id="emailWithTitle" class="form-control" placeholder="xxxx@xxx.xx">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="dobWithTitle" class="form-label">DOB</label>
-                            <input type="date" id="dobWithTitle" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="resume" class="form-label">Resume</label>
-                            <input type="file" id="resume" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="skills" class="form-label">Skills</label>
-                            <input type="text" id="skills" class="form-control" placeholder="Enter Skills">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="experience" class="form-label">Experience</label>
-                            <textarea id="experience" class="form-control" placeholder="Describe your experience" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-3">
-                            <label for="education" class="form-label">Education</label>
-                            <textarea id="education" class="form-control" placeholder="Describe your education background" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </div>
+
+<!-- Optional JavaScript; choose one of the two! -->
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -63,10 +63,16 @@
                         <div>Registration</div>
                     </a>
                 </li>
-<<<<<<< HEAD
+
                 <li class='menu-item@(currentPage == "/Home/Recruiter/Index" ? " active open"  : "")'>
                     <a asp-controller="Jobpost" asp-action="Index" class="menu-link">
                             <div>Active Jobs</div>
+                        </a>
+                    </li>
+
+                <li class='menu-item@(currentPage == "/jobpost/JobCards" ? " active open"  : "")'>
+                    <a asp-controller="Jobpost" asp-action="JobCards" class="menu-link">
+                            <div> Jobs</div>
                         </a>
                     </li>
                     <li class='menu-item@(currentPage == "/JobListings/ArchivedJobs" ? " active" : "")'>
@@ -74,13 +80,20 @@
                             <div>Archived Jobs</div>
                         </a>
                     </li>
-=======
-                <li class='menu-item@(currentPage == "/LayoutExamples/Blank" ? " active" : "")'>
-                    <a asp-controller="LayoutExamples" asp-action="Blank" class="menu-link">
+
+                <li class='menu-item@(currentPage == "/LayoutExamples/Container" ? " active" : "")'>
+                    <a asp-controller="LayoutExamples" asp-action="Container" class="menu-link">
                         <div>jop request</div>
                     </a>
                 </li>
->>>>>>> 83dcda94eafeee37564c66374c99f79d13583752
+
+                <li class='menu-item@(currentPage == "/Auth/LoginBasic" ? " active" : "")'>
+                    <a asp-controller="Auth" asp-action="LoginBasic" class="menu-link">
+                        <div>Login</div>  
+                    </a>
+                </li>
+
+
             </ul>
         </li>
         <li class='menu-item@(currentPage.StartsWith("/FormLayouts") ? " active open" : "")'>

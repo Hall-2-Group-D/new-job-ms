@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspnetCoreMvcFull.Migrations
 {
     [DbContext(typeof(RecruiterDbcontext))]
-<<<<<<<< HEAD:Migrations/20241102110035_init.Designer.cs
-    [Migration("20241102110035_init")]
-    partial class init
-========
-    [Migration("20241102110305_InitialCreate")]
-    partial class InitialCreate
->>>>>>>> 83dcda94eafeee37564c66374c99f79d13583752:Migrations/20241102110305_InitialCreate.Designer.cs
+    [Migration("20241104062928_initial migration")]
+    partial class initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +89,48 @@ namespace AspnetCoreMvcFull.Migrations
                     b.HasKey("id");
 
                     b.ToTable("tbl_users");
+                });
+
+            modelBuilder.Entity("AspnetCoreMvcFull.Models.JobApplication", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("AppliedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ContactNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Education")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Experience")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ResumePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tbl_JobApplications");
                 });
 
             modelBuilder.Entity("AspnetCoreMvcFull.Models.jobpostModel", b =>

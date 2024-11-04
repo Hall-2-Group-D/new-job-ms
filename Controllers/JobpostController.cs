@@ -132,5 +132,64 @@ namespace AspnetCoreMvcFull.Controllers
       }
       return Json(jobPost);
     }
+    //hataban please
+    [HttpGet]
+    public async Task<IActionResult> JobCards()
+    {
+      var jobs = await jbpostDbContext.Tbl_jobpostModels.ToListAsync();
+      return View(jobs);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ApplyForJob(JobApplication application, IFormFile resume)
+    {
+      if (resume == null || resume.Length == 0)
+      {
+        return Json(new { success = false, message = "Resume file is required." });
+      }
+
+      var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx" };
+      var fileExtension = Path.GetExtension(resume.FileName).ToLower();
+
+      if (!allowedExtensions.Contains(fileExtension))
+      {
+        return Json(new { success = false, message = "Invalid file type. Only PDF, DOCX, and XLSX files are accepted." });
+      }
+
+      var resumeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/resumes");
+      Directory.CreateDirectory(resumeDirectory); // It's okay to call this even if the directory exists; it won't recreate it.
+
+      var newFileName = Guid.NewGuid().ToString() + fileExtension; // Use GUID to avoid conflicts
+      var filePath = Path.Combine(resumeDirectory, newFileName);
+
+      try
+      {
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+          await resume.CopyToAsync(stream);
+        }
+
+        application.ResumePath = filePath;
+
+        if (ModelState.IsValid)
+        {
+          jbpostDbContext.Tbl_JobApplications.Add(application);
+          await jbpostDbContext.SaveChangesAsync();
+          return Json(new { success = true, message = "Application submitted successfully." });
+        }
+        else
+        {
+          var errorMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
+          return Json(new { success = false, message = string.Join("; ", errorMessages) });
+        }
+      }
+      catch (Exception ex)
+      {
+        // Log exception details here
+        return Json(new { success = false, message = $"An error occurred while processing your request: {ex.Message}" });
+      }
+    }
+
   }
 }
+    

@@ -9,6 +9,9 @@ namespace AspnetCoreMvcFull.Controllers
   {
     private readonly RecruiterDbcontext context;
 
+
+
+
     public userController(RecruiterDbcontext context)
     {
       this.context = context;

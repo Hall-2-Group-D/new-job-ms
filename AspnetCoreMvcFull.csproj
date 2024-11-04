@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Views\Account\bc.png" />
   </ItemGroup>
 
   <ItemGroup>
+=======
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+>>>>>>> 4dd8f1c4f4ce8b8c780a3d725773f81b8513886f
     <PackageReference Include="bootstrap" Version="5.3.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />

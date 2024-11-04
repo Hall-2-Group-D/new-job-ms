@@ -1,0 +1,357 @@
+@model List<AspnetCoreMvcFull.Models.jobpostModel>
+
+@{
+    Layout = "_BlankLayout";
+    ViewData["Title"] = "Login Basic - Pages";
+    // ViewData["Title"] = "Job Cards";
+}
+@* 
+<div class="container py-5">
+    <div class="row">
+        @foreach (var job in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@job.JobTitle</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@job.Location</h6>
+                        <p class="card-text">@job.JobDescription</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Type: @job.Category</li>
+                            <li class="list-group-item">Salary: @job.SalaryRange</li>
+                            <li class="list-group-item">Deadline: @job.Deadline.ToString("dd MMM, yyyy")</li>
+                        </ul>
+                        <a href="#" class="btn btn-success mt-3">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ *@
+
+
+
+@* 
+ @model List<AspnetCoreMvcFull.Models.JobPostModel>
+
+@{
+    Layout = "_BlankLayout";
+    ViewData["Title"] = "Job Listings";
+} *@
+
+@* <div class="container">
+    <div class="text-center mt-5">
+        <h1>Job Listing</h1>
+        <ul class="nav nav-tabs justify-content-center mt-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-target="Featured">Featured</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-target="Full Time">Full Time</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-target="Part Time">Part Time</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+<div class="container mt-5">
+    <div class="row">
+        @foreach (var job in Model)
+        {
+            if (job.Status.ToString() == "Active") // Check if the job is active
+            {
+                <div class="col-md-4 mb-3" data-category="@job.Category.Trim()">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@job.JobTitle</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@job.Location</h6>
+                            <div class="mb-2">
+                                <span class="badge bg-success">@job.Category</span>
+                                <span class="text-muted">| Salary: @job.SalaryRange</span>
+                            </div>
+                            <p class="card-text">@job.JobDescription</p>
+                            <div class="d-flex justify-content-between align-items-center mt-4">
+                                <small class="text-muted">Deadline: @job.Deadline.ToString("dd MMM, yyyy")</small>
+                                <a href="#" class="btn btn-success">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.nav-link');
+        const cards = document.querySelectorAll('.col-md-4');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function (event) {
+                event.preventDefault();
+                // Remove active class from all tabs and then add to the clicked tab
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                const targetCategory = this.getAttribute('data-target').trim(); // Ensure we trim any whitespace
+
+                console.log('Selected category:', targetCategory); // Debugging output
+
+                // Logic to toggle display of cards
+                if (targetCategory === 'Featured') {
+                    // Show all active cards
+                    cards.forEach(card => card.style.display = '');
+                    console.log('Showing all active jobs');
+                } else {
+                    // Show cards that match the category exactly
+                    cards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category').trim(); // Trim to ensure clean matching
+                        if (cardCategory === targetCategory) {
+                            card.style.display = '';
+                            console.log('Showing:', cardCategory); // Debug output
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+ *@
+
+@* 
+
+ @model List<AspnetCoreMvcFull.Models.JobPostModel>
+
+@{
+    Layout = "_BlankLayout";
+    ViewData["Title"] = "Job Listings";
+} *@
+
+
+
+
+
+<div class="container">
+    <div class="text-center mt-5">
+        <h1>Job Listing</h1>
+        <ul class="nav nav-tabs justify-content-center mt-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" data-target="all">All Jobs</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-target="Full Time">Full Time</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-target="Part Time">Part Time</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <!-- All Jobs -->
+    <div class="row" id="all-jobs">
+        @foreach (var job in Model.Where(j => j.Status.ToString() == "Active"))
+        {
+            <div class="col-md-12 mb-3">
+                <div class="job-card">
+                    <div class="job-title">@job.JobTitle</div>
+                    <div class="job-info">
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
+                        <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
+                        <span class="salary-range"><i class="fas fa-dollar-sign"></i> @job.SalaryRange</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="favorite"><i class="fas fa-heart"></i></button>
+                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
+                        <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Full Time Jobs -->
+    <div class="row" id="full-time-jobs" style="display: none;">
+        @foreach (var job in Model.Where(j => j.Category.ToString() == "Full-time" && j.Status.ToString() == "Active"))
+        {
+            <div class="col-md-12 mb-3">
+                <div class="job-card">
+                    <div class="job-title">@job.JobTitle</div>
+                    <div class="job-info">
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
+                        <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
+                        <span class="salary-range"><i class="fas fa-dollar-sign"></i> @job.SalaryRange</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="favorite"><i class="fas fa-heart"></i></button>
+                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
+                        <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Part Time Jobs -->
+    <div class="row" id="part-time-jobs" style="display: none;">
+        @foreach (var job in Model.Where(j => j.Category.ToString() == "Part-time" && j.Status.ToString() == "Active"))
+        {
+            <div class="col-md-12 mb-3">
+                <div class="job-card">
+                    <div class="job-title">@job.JobTitle</div>
+                    <div class="job-info">
+                        <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
+                        <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
+                        <span class="salary-range"><i class="fas fa-dollar-sign"></i> @job.SalaryRange</span>
+                    </div>
+                    <div class="job-actions">
+                        <button class="favorite"><i class="fas fa-heart"></i></button>
+
+                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
+                        <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<!-- Modal for Job Application -->
+<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form asp-action="ApplyForJob" asp-controller="Jobpost" method="post" enctype="multipart/form-data">
+
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Apply for Job</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Personal Information -->
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text"  id="firstName" name="firstName" class="form-control" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter your last name" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                            <label for="contactNumber" class="form-label">Contact Number</label>
+                            <input type="tel" id="contactNumber" name="contactNumber" class="form-control" placeholder="Enter your contact number" required>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="resume" class="form-label">Resume</label>
+                            <input  type="file" id="resume" name="resume" class="form-control" required>
+
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-4">
+                            <label for="skills" class="form-label">Skills</label>
+                            <textarea id="skills" name="skills" class="form-control" placeholder="List your skills" required></textarea>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="experience" class="form-label">Experience</label>
+                            <textarea id="experience" name="experience" class="form-control" placeholder="Describe your experience" required></textarea>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="education" class="form-label">Education</label>
+                            <textarea id="education" name="education" class="form-control" placeholder="Detail your educational background" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" data-bs-target="#modalCenter1">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-target="#modalCenter1">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="modalCenter1" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Thanks for your application</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Application submitted successfully.
+                   
+                   
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                </div>
+       
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        // Handle tab switching for job categories
+        const tabs = $('.nav-link');
+        tabs.on('click', function (event) {
+            event.preventDefault();
+            tabs.removeClass('active');
+            $(this).addClass('active');
+
+            let target = $(this).data('target');
+            $('#all-jobs').css('display', target === 'all' ? '' : 'none');
+            $('#full-time-jobs').css('display', target === 'Full Time' ? '' : 'none');
+            $('#part-time-jobs').css('display', target === 'Part Time' ? '' : 'none');
+        });
+
+        // Form submission handler
+        $('#jobApplicationForm').on('submit', function (event) {
+            event.preventDefault();
+
+            // Use jQuery to handle form data submission
+            $.ajax({
+                url: '@Url.Action("ApplyForJob", "Jobpost")',  // Ensure the correct URL is generated by ASP.NET Core
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,  // Don't process the files
+                contentType: false,  // Set content type to false as jQuery will tell the server its a query string request
+                success: function (data) {
+                    alert(data.message);  // Show success or error message from the server
+                    $('#modalCenter').modal('hide');  // Close the modal after submission
+                },
+                error: function (xhr, status, error) {
+                    console.error('Submission error:', error);
+                    alert('An error occurred while submitting the application.');
+                }
+            });
+        });
+    });
+</script>

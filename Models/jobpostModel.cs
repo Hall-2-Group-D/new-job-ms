@@ -33,5 +33,22 @@ namespace AspnetCoreMvcFull.Models
   }
 
 
+
+
+
+  public class JobApplication
+  {
+    public Guid Id { get; set; } // Unique identifier for each application
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string? ContactNumber { get; set; }
+    public String? ResumePath { get; set; } // Path to stored resume file
+    public string? Skills { get; set; }
+    public string? Experience { get; set; }
+    public string? Education { get; set; }
+    public DateTime AppliedOn { get; set; } = DateTime.Now; // Date of application
+  }
+
+
 }
 

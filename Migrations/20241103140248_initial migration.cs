@@ -6,15 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AspnetCoreMvcFull.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:Migrations/20241102110035_init.cs
-    public partial class init : Migration
-========
-    public partial class InitialCreate : Migration
->>>>>>>> 83dcda94eafeee37564c66374c99f79d13583752:Migrations/20241102110305_InitialCreate.cs
+    public partial class initialmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "tbl_admin_user",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    username = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    pass = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_admin_user", x => x.id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Tbl_jobpostModels",
                 columns: table => new
@@ -70,11 +82,20 @@ namespace AspnetCoreMvcFull.Migrations
                 {
                     table.PrimaryKey("PK_tbl_users", x => x.id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_tbl_admin_user_username",
+                table: "tbl_admin_user",
+                column: "username",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "tbl_admin_user");
+
             migrationBuilder.DropTable(
                 name: "Tbl_jobpostModels");
 

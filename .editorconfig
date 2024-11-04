@@ -9,6 +9,12 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+# IDE0022: Use block body for method
+csharp_style_expression_bodied_methods = true
+
+# Default severity for analyzer diagnostics with category 'Style'
+dotnet_analyzer_diagnostic.category-Style.severity = none
+
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false

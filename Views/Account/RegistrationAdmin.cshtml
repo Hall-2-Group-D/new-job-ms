@@ -1,20 +1,13 @@
-@model AspnetCoreMvcFull.Models.userViewNodel
+@model AspnetCoreMvcFull.Models.RegistrationViewModel
 @{
-    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
-
-
 }
 
-
-
-
-
 <!-- Form Start-->
-<form action="createUser" method="post">
+<form action="RegistrationAdmin" method="post">
 
     <div class="col-md-6">
         <div class="card">
-            <h5 class="card-header">Recruiter Form</h5>
+            <h5 class="card-header">Create Admin Form</h5>
             <div class="card-body">
                 <div class="mb-4">
                     <label for="exampleFormControlInput1" class="form-label">Full Name</label>
@@ -40,15 +33,13 @@
                     <span asp-validation-for="pass" class="text-danger"> </span>
                 </div>
 
-                <div class="mb-4">
-                    <label for="exampleFormControlInput1" class="form-label">Reg Date</label>
-                    <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="Enter" asp-for="reg_date" />
-                    <span asp-validation-for="reg_date" class="text-danger"> </span>
-                </div>
+                
 
-                
-                
-                
+
+
+
+
+
 
             </div>
 
@@ -56,7 +47,7 @@
                 <button class="btn btn-outline-primary" type="submit">Add</button>
             </div>
 
-            
+
 
         </div>
     </div>
@@ -65,10 +56,7 @@
 
 
 <style>
-  form{
-    margin-left:20%;
-  }
+    form{
+      margin-left:20%;
+    }
 </style>
-
-
-

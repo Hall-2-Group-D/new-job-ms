@@ -14,5 +14,9 @@ namespace AspnetCoreMvcFull.Models.Dbent
     public string location { get; set; }
     public  DateTime reg_date { get; set; }
     public int user_id { get; set; }
+
+    public class context
+    {
+    }
   }
 }

@@ -12,13 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspnetCoreMvcFull.Migrations
 {
     [DbContext(typeof(RecruiterDbcontext))]
-<<<<<<<< HEAD:Migrations/20241102110035_init.Designer.cs
-    [Migration("20241102110035_init")]
-    partial class init
-========
-    [Migration("20241102110305_InitialCreate")]
-    partial class InitialCreate
->>>>>>>> 83dcda94eafeee37564c66374c99f79d13583752:Migrations/20241102110305_InitialCreate.Designer.cs
+    [Migration("20241103140248_initial migration")]
+    partial class initialmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,6 +136,39 @@ namespace AspnetCoreMvcFull.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tbl_jobpostModels");
+                });
+
+            modelBuilder.Entity("AspnetCoreMvcFull.adminn.AdminAccount", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pass")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("username")
+                        .IsUnique();
+
+                    b.ToTable("tbl_admin_user");
                 });
 #pragma warning restore 612, 618
         }

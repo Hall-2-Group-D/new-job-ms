@@ -56,6 +56,12 @@
                         <div>Create User</div>
                     </a>
                 </li>
+
+                <li class='menu-item@(currentPage == "/Account/RegistrationAdmin" ? " active" : "")'>
+                    <a asp-controller="Account" asp-action="RegistrationAdmin" class="menu-link">
+                        <div>Create Admin</div>
+                    </a>
+                </li>
                 
 
                 <li class="menu-item@(currentPage == "/Recruiter/Index" ? " active" : "")">
@@ -63,7 +69,7 @@
                         <div>Registration</div>
                     </a>
                 </li>
-<<<<<<< HEAD
+
                 <li class='menu-item@(currentPage == "/Home/Recruiter/Index" ? " active open"  : "")'>
                     <a asp-controller="Jobpost" asp-action="Index" class="menu-link">
                             <div>Active Jobs</div>
@@ -74,13 +80,12 @@
                             <div>Archived Jobs</div>
                         </a>
                     </li>
-=======
+
                 <li class='menu-item@(currentPage == "/LayoutExamples/Blank" ? " active" : "")'>
                     <a asp-controller="LayoutExamples" asp-action="Blank" class="menu-link">
                         <div>jop request</div>
                     </a>
                 </li>
->>>>>>> 83dcda94eafeee37564c66374c99f79d13583752
             </ul>
         </li>
         <li class='menu-item@(currentPage.StartsWith("/FormLayouts") ? " active open" : "")'>
@@ -89,9 +94,9 @@
                 <div>Report</div>
             </a>
             <ul class="menu-sub">
-                <li class='menu-item@(currentPage == "/FormLayouts/Vertical" ? " active" : "")'>
-                    <a asp-controller="FormLayouts" asp-action="Vertical" class="menu-link">
-                        <div>Vertical Form</div>
+                <li class='menu-item@(currentPage == "/Account/Admindabacid" ? " active" : "")'>
+                    <a asp-controller="Account" asp-action="Admindabacid" class="menu-link">
+                        <div>Admin Report Form</div>
                     </a>
                 </li>
                 <li class='menu-item@(currentPage == "/FormLayouts/Horizontal" ? " active" : "")'>
@@ -105,4 +110,3 @@
     </ul>
 
 </aside>
-<!-- / Menu -->

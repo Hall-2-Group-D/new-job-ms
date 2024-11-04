@@ -1,0 +1,96 @@
+@model List<AspnetCoreMvcFull.Models.RegistrationViewModel>
+@{
+
+}
+
+
+
+@section VendorStyles {
+    <link rel="stylesheet" href="~/vendor/libs/apex-charts/apex-charts.css" />
+}
+@section VendorScripts {
+    <script src="~/vendor/libs/apex-charts/apexcharts.js"></script>
+}
+@section PageScripts {
+    <script src="~/js/dashboards-analytics.js"></script>
+}
+
+@* ************** Content ************** *@
+<div class="row">
+
+    <!-- Total Revenue -->
+    <!-- Form Start-->
+    <form>
+
+ 
+
+        <!-- Basic Bootstrap Table -->
+        <div class="card">
+            <h5 class="card-header">Table Basic</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Full Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                           
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @if (Model != null && Model.Any())
+
+                        {
+                            @foreach (var user in Model)
+
+                            {
+                                <tr>
+                                    <td>@user.fullname</td>
+                                    <td>@user.username</td>
+                                    <td>@user.email</td>
+
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-controller="user" asp-action="edituser" asp-route-id="@user.id" class="btn btn-primary ">Edit</a>
+                                            <a asp-controller="user" asp-action="delete" asp-route-id="@user.id" class="btn btn-danger">Delete</a>
+
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+
+                        else
+
+                        {
+                            <tr>
+                                <td colspan="6">
+                                    <div>
+                                        No Recruiter Available At this Moment!
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--/ Basic Bootstrap Table -->
+    </form>
+    <!--Form End-->
+    <!--/ Total Revenue -->
+
+</div>
+<div class="row">
+    <!-- Order Statistics -->
+    <!--/ Order Statistics -->
+    <!-- Expense Overview -->
+    <!--/ Expense Overview -->
+    <!-- Transactions -->
+    <!--/ Transactions -->
+</div>

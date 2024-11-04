@@ -1,4 +1,5 @@
 using AspnetCoreMvcFull.Data;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<RecruiterDbcontext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("jobconnection")));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
 var app = builder.Build();
 
@@ -24,11 +27,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboards}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Account}/{id?}");
 
 app.Run();

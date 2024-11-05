@@ -163,7 +163,8 @@
         {
             <div class="col-md-12 mb-3">
                 <div class="job-card">
-                    <div class="job-title">@job.JobTitle</div>
+                  <div class="company"> <strong>Company Name:  </strong>  @job.CompanyName </div>
+                    <div class="job-title">  <strong> Jop Title :  </strong> @job.JobTitle</div>
                     <div class="job-info">
                         <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
                         <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
@@ -171,9 +172,24 @@
                     </div>
                     <div class="job-actions">
                         <button class="favorite"><i class="fas fa-heart"></i></button>
-                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
+                        @* <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button> *@
+
                         <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+
+                        <button class="apply-btn"
+                                data-id="@job.Id"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter"
+                                data-companyname="@job.CompanyName">
+                            Apply Now
+                        </button>
+
+
+                       
                     </div>
+
+
+
                 </div>
             </div>
         }
@@ -185,7 +201,8 @@
         {
             <div class="col-md-12 mb-3">
                 <div class="job-card">
-                    <div class="job-title">@job.JobTitle</div>
+                    <div class="company"> <strong>Company Name:  </strong>  @job.CompanyName </div>
+                    <div class="job-title">  <strong> Jop Title :  </strong> @job.JobTitle</div>
                     <div class="job-info">
                         <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
                         <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
@@ -193,9 +210,24 @@
                     </div>
                     <div class="job-actions">
                         <button class="favorite"><i class="fas fa-heart"></i></button>
-                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
+                        @* <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button> *@
+
                         <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+
+                        <button class="apply-btn"
+                                data-id="@job.Id"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter"
+                                data-companyname="@job.CompanyName">
+                            Apply Now
+                        </button>
+
+
+
                     </div>
+
+
+
                 </div>
             </div>
         }
@@ -207,7 +239,8 @@
         {
             <div class="col-md-12 mb-3">
                 <div class="job-card">
-                    <div class="job-title">@job.JobTitle</div>
+                    <div class="company"> <strong>Company Name:  </strong>  @job.CompanyName </div>
+                    <div class="job-title">  <strong> Jop Title :  </strong> @job.JobTitle</div>
                     <div class="job-info">
                         <span class="location"><i class="fas fa-map-marker-alt"></i> @job.Location</span>
                         <span class="job-type"><i class="fas fa-clock"></i> @job.Category</span>
@@ -215,10 +248,24 @@
                     </div>
                     <div class="job-actions">
                         <button class="favorite"><i class="fas fa-heart"></i></button>
+                        @* <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button> *@
 
-                        <button class="apply-btn" data-id="@job.Id" data-bs-toggle="modal" data-bs-target="#modalCenter">Apply Now</button>
                         <span class="deadline">Date Line: @job.Deadline.ToString("dd MMM, yyyy")</span>
+
+                        <button class="apply-btn"
+                                data-id="@job.Id"
+                                data-bs-toggle="modal"
+                                data-bs-target="#modalCenter"
+                                data-companyname="@job.CompanyName">
+                            Apply Now
+                        </button>
+
+
+
                     </div>
+
+
+
                 </div>
             </div>
         }
@@ -231,16 +278,26 @@
 <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
+
             <form asp-action="ApplyForJob" asp-controller="Jobpost" method="post" enctype="multipart/form-data">
 
-
+@* 
                 <div class="modal-header">
+
                     <h5 class="modal-title" id="modalCenterTitle">Apply for Job</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div> *@
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalCenterTitle">Apply for Job at <span id="companyNameHeader">Company Name</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
+
                 <div class="modal-body">
                     <!-- Personal Information -->
                     <div class="row mb-3">
+                        <input type="hidden" id="companyNameInput" name="companyName">
+
                         <div class="col-lg-6">
                             <label for="firstName" class="form-label">First Name</label>
                             <input type="text"  id="firstName" name="firstName" class="form-control" placeholder="Enter your first name" required>
@@ -314,11 +371,63 @@
 </div>
 
 
+@* 
+
+
+<script>
+    $(document).ready(function () {
+        // Handle tab switching for job categories
+        const tabs = $('.nav-link');
+        tabs.on('click', function (event) {
+            event.preventDefault();
+            tabs.removeClass('active');
+            $(this).addClass('active');
+
+            let target = $(this).data('target');
+            $('#all-jobs').css('display', target === 'all' ? '' : 'none');
+            $('#full-time-jobs').css('display', target === 'Full Time' ? '' : 'none');
+            $('#part-time-jobs').css('display', target === 'Part Time' ? '' : 'none');
+        });
+
+        // Form submission handler
+        $('#jobApplicationForm').on('submit', function (event) {
+            event.preventDefault();
+
+            // Use jQuery to handle form data submission
+            $.ajax({
+                url: '@Url.Action("ApplyForJob", "Jobpost")',  // Ensure the correct URL is generated by ASP.NET Core
+                type: 'POST',
+                data: new FormData(this),
+                processData: false,  // Don't process the files
+                contentType: false,  // Set content type to false as jQuery will tell the server its a query string request
+                success: function (data) {
+                    alert(data.message);  // Show success or error message from the server
+                    $('#modalCenter').modal('hide');  // Close the modal after submission
+                },
+                error: function (xhr, status, error) {
+                    console.error('Submission error:', error);
+                    alert('An error occurred while submitting the application.');
+                }
+            });
+        });
+    });
+</script>
+ *@
+
+
+
 
 
 
 <script>
     $(document).ready(function () {
+        $('.apply-btn').on('click', function () {
+            var companyName = $(this).data('companyname');
+            $('#companyNameInput').val(companyName);  // This must match the hidden input's ID
+            $('#companyNameHeader').text(companyName); // Sets the modal title
+        });
+
+
         // Handle tab switching for job categories
         const tabs = $('.nav-link');
         tabs.on('click', function (event) {

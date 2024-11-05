@@ -2,6 +2,7 @@ namespace AspnetCoreMvcFull.Models
 {
   public class jobpostviewModel
   {
+    public string CompanyName { get; set; } // New field for the company name
 
     public string JobTitle { get; set; } // Matches "Job Title" field
 

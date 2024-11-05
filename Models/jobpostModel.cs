@@ -4,6 +4,9 @@ namespace AspnetCoreMvcFull.Models
   {
     public Guid Id { get; set; } // Unique identifier for each job post
 
+    public string CompanyName { get; set; } // New field for the company name
+
+
     public string JobTitle { get; set; } // Matches "Job Title" field
 
     public string JobDescription { get; set; } // Matches "Job Description" field

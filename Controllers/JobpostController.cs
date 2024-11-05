@@ -30,6 +30,7 @@ namespace AspnetCoreMvcFull.Controllers
       var jobpostModel = new jobpostModel()
       {
         Id = Guid.NewGuid(),
+        CompanyName = jobpostRequest.CompanyName,
         JobTitle = jobpostRequest.JobTitle,
         JobDescription = jobpostRequest.JobDescription,
         Requirements = jobpostRequest.Requirements,
@@ -61,6 +62,7 @@ namespace AspnetCoreMvcFull.Controllers
       var model = new updatejobpostModel()
       {
         Id = jobpost.Id,
+        CompanyName =jobpost.CompanyName,
         JobTitle = jobpost.JobTitle,
         JobDescription = jobpost.JobDescription,
         Requirements = jobpost.Requirements,
@@ -85,7 +87,7 @@ namespace AspnetCoreMvcFull.Controllers
         TempData["ErrorMessage"] = "Job post not found.";
         return RedirectToAction("Index");
       }
-
+      jobpost.CompanyName = model.CompanyName;
       jobpost.JobTitle = model.JobTitle;
       jobpost.JobDescription = model.JobDescription;
       jobpost.Requirements = model.Requirements;
@@ -145,7 +147,7 @@ namespace AspnetCoreMvcFull.Controllers
     {
       if (resume == null || resume.Length == 0)
       {
-        return Json(new { success = false, message = "Resume file is required." });
+        return Content("<script>alert('Resume file is required.'); window.location.href = document.referrer;</script>", "text/html");
       }
 
       var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx" };
@@ -153,13 +155,13 @@ namespace AspnetCoreMvcFull.Controllers
 
       if (!allowedExtensions.Contains(fileExtension))
       {
-        return Json(new { success = false, message = "Invalid file type. Only PDF, DOCX, and XLSX files are accepted." });
+        return Content("<script>alert('Invalid file type. Only PDF, DOCX, and XLSX files are accepted.'); window.location.href = document.referrer;</script>", "text/html");
       }
 
       var resumeDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/resumes");
-      Directory.CreateDirectory(resumeDirectory); // It's okay to call this even if the directory exists; it won't recreate it.
+      Directory.CreateDirectory(resumeDirectory);
 
-      var newFileName = Guid.NewGuid().ToString() + fileExtension; // Use GUID to avoid conflicts
+      var newFileName = Guid.NewGuid().ToString() + fileExtension;
       var filePath = Path.Combine(resumeDirectory, newFileName);
 
       try
@@ -175,20 +177,18 @@ namespace AspnetCoreMvcFull.Controllers
         {
           jbpostDbContext.Tbl_JobApplications.Add(application);
           await jbpostDbContext.SaveChangesAsync();
-          return Json(new { success = true, message = "Application submitted successfully." });
+          return Content("<script>alert('Application submitted successfully. We will contact you via email As soon.'); window.location.href = document.referrer;</script>", "text/html");
         }
-        else
-        {
-          var errorMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
-          return Json(new { success = false, message = string.Join("; ", errorMessages) });
-        }
+
+        var errorMessages = ModelState.Values.SelectMany(v => v.Errors.Select(b => b.ErrorMessage));
+        return Content($"<script>alert('{string.Join("; ", errorMessages)}'); window.location.href = document.referrer;</script>", "text/html");
       }
       catch (Exception ex)
       {
-        // Log exception details here
-        return Json(new { success = false, message = $"An error occurred while processing your request: {ex.Message}" });
+        return Content($"<script>alert('An error occurred while processing your request: {ex.Message}'); window.location.href = document.referrer;</script>", "text/html");
       }
     }
+
 
   }
 }

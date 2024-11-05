@@ -1,40 +1,112 @@
+/*.job-card {
+  display: flex;
+  justify-content: space-between;*/ /* Evenly space content */
+  /*align-items: center;*/ /* Vertically center all elements */
+  /*padding: 10px 20px;*/ /* Padding for some breathing room */
+  /*background-color: #fff;*/ /* Clean white background */
+  /*border: 1px solid #e1e1e1;*/ /* Subtle border for definition */
+  /*border-radius: 8px;*/ /* Rounded corners */
+  /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);*/ /* Soft shadow for depth */
+  /*transition: box-shadow 0.3s ease-in-out;*/ /* Smooth transition for hover effect */
+/*}
+
+  .job-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);*/ /* More pronounced shadow on hover */
+  /*}
+
+.job-title {
+  font-size: 0.9rem;
+  font-weight: 600;*/ /* Bold font weight for the job title */
+  /*color: #333;*/ /* Darker text for better readability */
+/*}
+
+.company-name {
+  font-size: 0.9rem;
+  color: #666;
+  margin-right: 15px;*/ /* Space between company name and job title */
+/*}
+
+.job-info {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #666;*/ /* Matching color for less priority information */
+/*}
+
+  .job-info span {
+    margin-right: 10px;*/ /* Space between each info item */
+  /*}
+
+  .job-info i {
+    color: #007bff;*/ /* Icon color */
+    /*margin-right: 5px;*/ /* Space between icon and text */
+  /*}
+
+.apply-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;*/ /* Bold font for visibility */
+/*}
+
+  .apply-btn:hover {
+    background-color: #218838;*/ /* Darker shade on hover for depth */
+  /*}
+
+.favorite {
+  color: #d9534f;*/ /* Heart icon color */
+  /*font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  margin-right: 15px;*/ /* Space before apply button */
+/*}
+
+.deadline {
+  font-size: 0.85rem;
+  color: #555;*/ /* Slightly darker for emphasis */
+  /*white-space: nowrap;*/ /* Ensure it does not break into multiple lines */
+/*}*/
 .job-card {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  padding: 20px;
+  background-color: #ffffff; /* Lighter background for a cleaner look */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soften shadow for subtle depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smoother transition */
 }
 
   .job-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Increase shadow on hover for a "lifting" effect */
   }
 
 .job-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.4rem; /* Slightly larger for emphasis */
+  color: #212529; /* Darker shade for improved contrast */
 }
 
 .job-info {
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
-  color: #666;
+  font-size: 1rem; /* Increase font size for readability */
+  color: #495057; /* Soft dark grey for text */
 }
 
   .job-info span {
     display: inline-flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 20px; /* Increase spacing for better separation */
   }
 
   .job-info i {
-    margin-right: 5px;
-    color: #007bff;
+    margin-right: 8px;
+    color: #17a2b8; /* Use a brighter color for icons */
   }
 
 .job-actions {
@@ -45,27 +117,29 @@
 .favorite {
   background: none;
   border: none;
-  color: #d9534f;
-  font-size: 1.2rem;
+  color: #dc3545; /* A more vibrant red for the heart icon */
+  font-size: 1.4rem; /* Larger icon for easier interaction */
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 5px; /* More space between buttons */
 }
 
 .apply-btn {
-  background-color: #28a745;
-  color: #fff;
-  padding: 5px 15px;
+  background-color: #007bff; /* Brighter blue for a more appealing button */
+  color: #ffffff;
+  padding: 10px 10px; /* More padding for a better button shape */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 600; /* Bold font for clarity */
 }
 
   .apply-btn:hover {
-    background-color: #218838;
+    background-color: #0056b3; /* Darker on hover for a pleasant visual effect */
   }
 
 .deadline {
-  font-size: 0.85rem;
-  color: #666;
+  padding: 10px 20px; /* More padding for a better button shape */
+
+  font-size: 0.9rem; /* Slightly larger for clarity */
+  color: #6c757d; /* Standard gray for less important text */
 }

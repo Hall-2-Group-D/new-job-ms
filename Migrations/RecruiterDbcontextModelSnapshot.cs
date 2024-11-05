@@ -173,6 +173,39 @@ namespace AspnetCoreMvcFull.Migrations
 
                     b.ToTable("Tbl_jobpostModels");
                 });
+
+            modelBuilder.Entity("AspnetCoreMvcFull.adminn.AdminAccount", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("pass")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("username")
+                        .IsUnique();
+
+                    b.ToTable("tbl_admin_user");
+                });
 #pragma warning restore 612, 618
         }
     }

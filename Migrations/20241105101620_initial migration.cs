@@ -12,7 +12,6 @@ namespace AspnetCoreMvcFull.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:Migrations/20241103140248_initial migration.cs
                 name: "tbl_admin_user",
                 columns: table => new
                 {
@@ -26,24 +25,25 @@ namespace AspnetCoreMvcFull.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbl_admin_user", x => x.id);
-========
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tbl_JobApplications",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ResumePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Education = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ResumePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Education = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AppliedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tbl_JobApplications", x => x.Id);
->>>>>>>> 4dd8f1c4f4ce8b8c780a3d725773f81b8513886f:Migrations/20241104062928_initial migration.cs
                 });
 
             migrationBuilder.CreateTable(
@@ -51,6 +51,7 @@ namespace AspnetCoreMvcFull.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Requirements = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -113,11 +114,10 @@ namespace AspnetCoreMvcFull.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:Migrations/20241103140248_initial migration.cs
                 name: "tbl_admin_user");
-========
+
+            migrationBuilder.DropTable(
                 name: "Tbl_JobApplications");
->>>>>>>> 4dd8f1c4f4ce8b8c780a3d725773f81b8513886f:Migrations/20241104062928_initial migration.cs
 
             migrationBuilder.DropTable(
                 name: "Tbl_jobpostModels");

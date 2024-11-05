@@ -29,6 +29,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboards}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Account}/{id?}");
 
 app.Run();
+//kanaaaaa   saxan please 

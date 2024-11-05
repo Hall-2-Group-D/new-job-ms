@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspnetCoreMvcFull.Migrations
 {
     [DbContext(typeof(RecruiterDbcontext))]
-<<<<<<<< HEAD:Migrations/20241103140248_initial migration.Designer.cs
-    [Migration("20241103140248_initial migration")]
-========
-    [Migration("20241104062928_initial migration")]
->>>>>>>> 4dd8f1c4f4ce8b8c780a3d725773f81b8513886f:Migrations/20241104062928_initial migration.Designer.cs
+    [Migration("20241105101620_initial migration")]
     partial class initialmigration
     {
         /// <inheritdoc />
@@ -105,31 +101,24 @@ namespace AspnetCoreMvcFull.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ContactNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Education")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Experience")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResumePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Skills")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -144,6 +133,10 @@ namespace AspnetCoreMvcFull.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

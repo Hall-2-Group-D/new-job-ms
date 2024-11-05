@@ -1,6 +1,7 @@
 using AspnetCoreMvcFull.adminn;
 using AspnetCoreMvcFull.Data;
 using AspnetCoreMvcFull.Models;
+using AspnetCoreMvcFull.Models.Dbent;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
@@ -30,35 +31,45 @@ namespace AspnetCoreMvcFull.Controllers
     [HttpPost]
     public IActionResult RegistrationAdmin(RegistrationViewModel model)
     {
-      if(ModelState.IsValid)
+      if (!ModelState.IsValid)
       {
-        AdminAccount account = new AdminAccount();
-        account.fullname = model.fullname;
-        account.username = model.username;
-        account.email = model.email;
-        account.pass = model.pass;
-
-        try
-        {
-          _context.tbl_admin_user.Add(account);
-          _context.SaveChanges();
-
-          ModelState.Clear();
-          ViewBag.Message = $"{account.fullname} Registered SuccessFully.";
-
-        }
-        catch (DbUpdateException ex)
-        {
-
-
-          ModelState.AddModelError("", "Please Enter Unique Email Or Paaword");
-          return View(model);
-
-        }
-        return View();
+        TempData["ErrorMessage"] = "Model data is not valid. Please review the entries.";
+        return View(model); // Return the view with existing model data to show form validation errors
       }
-      return View(model);
+
+      try
+      {
+        // Check if the username already exists
+        bool usernameExists = _context.tbl_admin_user.Any(u => u.username == model.username);
+        if (usernameExists)
+        {
+          TempData["ErrorMessage"] = "The username already exists. Please choose a different username.";
+          return View(model); // Return the same view to allow user correction
+        }
+
+        // Proceed to create new account
+        var account = new AdminAccount
+        {
+          fullname = model.fullname,
+          username = model.username,
+          email = model.email,
+          pass = model.pass,
+        };
+
+        _context.tbl_admin_user.Add(account);
+        _context.SaveChanges();
+        TempData["successMessage"] = "User created successfully!";
+        return View(); // Redirect to a confirmation or a success page to avoid resubmission
+      }
+      catch (Exception ex)
+      {
+        TempData["ErrorMessage"] = $"Error: {ex.Message}";
+        return View(model); // Return the view with error messages
+      }
     }
+
+
+
 
     public IActionResult Account()
     {

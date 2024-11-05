@@ -1,12 +1,35 @@
 @model AspnetCoreMvcFull.Models.RegistrationViewModel
 @{
+    var successMessage = TempData["successMessage"]?.ToString();
+    var ErrorMessage = TempData["ErrorMessage"]?.ToString();
+
 }
 
 <!-- Form Start-->
 <form action="RegistrationAdmin" method="post">
 
+
+
+
     <div class="col-md-6">
         <div class="card">
+            @if (!string.IsNullOrWhiteSpace(@successMessage))
+
+            {
+                <div class="alert alert-success">
+                    <strong>Success! </strong>@successMessage
+                </div>
+            }
+
+
+
+            else if (!string.IsNullOrWhiteSpace(@ErrorMessage))
+
+            {
+                <div class="alert alert-danger">
+                    <strong>Error! </strong>@ErrorMessage
+                </div>
+            }
             <h5 class="card-header">Create Admin Form</h5>
             <div class="card-body">
                 <div class="mb-4">
